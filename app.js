@@ -28,7 +28,7 @@ class DisplayBooks {
       <td>${book.author}</td>
       <td>${book.pageNum}</td>
       <td><button class="btn btn-info btn-sm" id="read" >${book.isRead}</button></td>
-      <td><a href="#" class="btn btn-danger btn-sm delete">DEL</a></td>
+      <td><a href="#" class="btn btn-danger btn-sm delete"  id="delete">DEL</a></td>
       `
 
     list.appendChild(row)
@@ -119,7 +119,6 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
 /* 6. Event: Remove a Book */
 document.querySelector('#book-list').addEventListener('click', (e) => {
   e.preventDefault()
-
     // remove from display
   DisplayBooks.deleteBook(e.target)
 
