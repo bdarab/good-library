@@ -1,24 +1,16 @@
 /* 1. Book Class */
-
-
-// let myBooks = [];
-/*
-function addBookToLibrary() {
-  // do stuff here
-}
-
-let singer = new Book()
-console.log(singer)
-*/
-
-
 class Book{
 // the constructor...
-  constructor(title,author,pageNum,read){
+  constructor(
+    title = '',
+    author = '',
+    pageNum = 0,
+    isRead = false
+    ){
     this.title = title
     this.author = author
     this.pageNum = pageNum
-    this.read = read
+    this.isRead = isRead
     } 
 }
 
@@ -35,9 +27,10 @@ class DisplayBooks {
       <td>${book.title}</td>
       <td>${book.author}</td>
       <td>${book.pageNum}</td>
-      <td>${book.read}</td>
+      <td><button class="btn btn-info btn-sm" id="read" >${book.isRead}</button></td>
       <td><a href="#" class="btn btn-danger btn-sm delete">DEL</a></td>
-    `
+      `
+
     list.appendChild(row)
   }
 
@@ -63,7 +56,6 @@ class DisplayBooks {
     document.querySelector('#title').value = ''
     document.querySelector('#author').value = ''
     document.querySelector('#pagenum').value = ''
-    document.querySelector('#isread').value = ''
   }
 }
 
@@ -98,6 +90,7 @@ class Store {
 
 /* 4. Event: Display Books */
 document.addEventListener('DOMContentLoaded', DisplayBooks.displayBooks )
+
 /* 5. Event Add a Book */
 document.querySelector('#book-form').addEventListener('submit', (e) => {
   e.preventDefault()
@@ -105,14 +98,12 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
   const title = document.querySelector('#title').value
   const author = document.querySelector('#author').value
   const pageNum = document.querySelector('#pagenum').value
-  const read = document.querySelector('#isread').value
-
   // Validate
   if(title === '' || author === '' || pageNum === '') {
     DisplayBooks.showAlert('Please fill all fields', 'danger')
   } else {
   // instantiate Books
-    const book = new Book(title, author, pageNum, read)
+    const book = new Book(title, author, pageNum)
     // Add to display
     DisplayBooks.addBookToLibrary(book)
     // Add book to Storage
@@ -123,9 +114,7 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
     // Clear input feilds
     DisplayBooks.clearInputs()
   }
-})
-
-
+  })
 
 /* 6. Event: Remove a Book */
 document.querySelector('#book-list').addEventListener('click', (e) => {
