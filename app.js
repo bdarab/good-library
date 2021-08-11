@@ -1,34 +1,21 @@
 /* 1. Book Class */
-
-
-// let myBooks = [];
-/*
-function addBookToLibrary() {
-  // do stuff here
-}
-
-let singer = new Book()
-console.log(singer)
-*/
-
-
-class Book{
-// the constructor...
-  constructor(title,author,pageNum,read){
+class Book {
+  // the constructor...
+  constructor(title, author, pageNum, read) {
     this.title = title
     this.author = author
     this.pageNum = pageNum
     this.read = read
-    } 
+  }
 }
 
 /* 2. DisplayBooks Class */
 class DisplayBooks {
-  static displayBooks(){
-     const myLibrary = Store.getBooks()
-     myLibrary.forEach((book) => DisplayBooks.addBookToLibrary(book)) 
+  static displayBooks() {
+    const myLibrary = Store.getBooks()
+    myLibrary.forEach((book) => DisplayBooks.addBookToLibrary(book))
   }
-  static addBookToLibrary(book){
+  static addBookToLibrary(book) {
     const list = document.querySelector('#book-list')
     const row = document.createElement('tr')
     row.innerHTML = `
@@ -42,7 +29,7 @@ class DisplayBooks {
   }
 
   static deleteBook(element) {
-    if(element.classList.contains('delete')) {
+    if (element.classList.contains('delete')) {
       element.parentElement.parentElement.remove()
     }
   }
@@ -55,7 +42,7 @@ class DisplayBooks {
     const form = document.querySelector('#book-form')
     container.insertBefore(div, form)
     // set timer
-    setTimeout(() => 
+    setTimeout(() =>
       document.querySelector('.alert').remove(), 2000)
   }
 
@@ -69,9 +56,9 @@ class DisplayBooks {
 
 /* 3. Store Class */
 class Store {
-  static getBooks(){
-    let books 
-    if(localStorage.getItem('books') === null) {
+  static getBooks() {
+    let books
+    if (localStorage.getItem('books') === null) {
       books = []
     } else {
       books = JSON.parse(localStorage.getItem('books'))
@@ -79,13 +66,13 @@ class Store {
     return books
   }
 
-  static addBook(book){
+  static addBook(book) {
     const books = Store.getBooks()
     books.push(book)
     localStorage.setItem('books', JSON.stringify(books))
   }
 
-  static removeBook(title){
+  static removeBook(title) {
     const books = Store.getBooks()
     books.forEach((book, index) => {
       if (book.title === title) {
@@ -97,7 +84,7 @@ class Store {
 }
 
 /* 4. Event: Display Books */
-document.addEventListener('DOMContentLoaded', DisplayBooks.displayBooks )
+document.addEventListener('DOMContentLoaded', DisplayBooks.displayBooks)
 /* 5. Event Add a Book */
 document.querySelector('#book-form').addEventListener('submit', (e) => {
   e.preventDefault()
@@ -108,10 +95,10 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
   const read = document.querySelector('#isread').value
 
   // Validate
-  if(title === '' || author === '' || pageNum === '') {
+  if (title === '' || author === '' || pageNum === '') {
     DisplayBooks.showAlert('Please fill all fields', 'danger')
   } else {
-  // instantiate Books
+    // instantiate Books
     const book = new Book(title, author, pageNum, read)
     // Add to display
     DisplayBooks.addBookToLibrary(book)
@@ -131,12 +118,16 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
 document.querySelector('#book-list').addEventListener('click', (e) => {
   e.preventDefault()
 
-    // remove from display
+  // remove from display
   DisplayBooks.deleteBook(e.target)
 
-    // remove from Storage
+  // remove from Storage
   Store.removeBook(e.target.parentElement.parentElement.firstChild.nextElementSibling.textContent)
-    // Alert confirmation
+  // Alert confirmation
   DisplayBooks.showAlert('the book has been removed', 'danger')
 })
 
+function check() {
+  document.getElementById("isread").checked = true;
+  read.textContent = 'Read'
+}
