@@ -1,11 +1,10 @@
 /* 1. Book Class */
 class Book {
   // the constructor...
-  constructor(title, author, pageNum, read) {
+  constructor(title, author, pageNum) {
     this.title = title
     this.author = author
     this.pageNum = pageNum
-    this.read = read
   }
 }
 
@@ -22,7 +21,6 @@ class DisplayBooks {
       <td>${book.title}</td>
       <td>${book.author}</td>
       <td>${book.pageNum}</td>
-      <td>${book.read}</td>
       <td><a href="#" class="btn btn-danger btn-sm delete">DEL</a></td>
     `
     list.appendChild(row)
@@ -49,8 +47,7 @@ class DisplayBooks {
   static clearInputs() {
     document.querySelector('#title').value = ''
     document.querySelector('#author').value = ''
-    document.querySelector('#pagenum').value = ''
-    document.querySelector('#isread').value = ''
+    document.querySelector('#pageNum').value = ''
   }
 }
 
@@ -91,15 +88,14 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
   // get values
   const title = document.querySelector('#title').value
   const author = document.querySelector('#author').value
-  const pageNum = document.querySelector('#pagenum').value
-  const read = document.querySelector('#isread').value
+  const pageNum = document.querySelector('#pageNum').value
 
   // Validate
   if (title === '' || author === '' || pageNum === '') {
     DisplayBooks.showAlert('Please fill all fields', 'danger')
   } else {
     // instantiate Books
-    const book = new Book(title, author, pageNum, read)
+    const book = new Book(title, author, pageNum)
     // Add to display
     DisplayBooks.addBookToLibrary(book)
     // Add book to Storage
@@ -126,8 +122,3 @@ document.querySelector('#book-list').addEventListener('click', (e) => {
   // Alert confirmation
   DisplayBooks.showAlert('the book has been removed', 'danger')
 })
-
-function check() {
-  document.getElementById("isread").checked = true;
-  read.textContent = 'Read'
-}
