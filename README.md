@@ -1,3 +1,5 @@
-<h1>Online Library</h1>
-This repository is setup for development of an online-library-app. starting from version 0.1, and hpefully move on till eventually succeed on deploying version 1.0.
-For now it is single person's effort. Hopefully grabs the attention of other coders to form a team.
+<h1>An online private library</h1>
+
+<h3>As an exercise for The Odin Project's JavaScript course</h3>
+<p>This project is the result of The Odin Project's JavaScript object-oriented programming principles lesson.</p>
+<p>I also have to thank Brad Traversy for his excellent tutorial on the subject that helped me a lot along the way.</p>
